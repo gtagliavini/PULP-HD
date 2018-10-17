@@ -5,11 +5,11 @@
 #include <math.h>
 #include "omp.h"
 
- 
+
 
 #define PULP_L1_DATA RT_L1_DATA
 #define PULP_L2_DATA RT_L2_DATA
- 
+
 
 //dimension of the hypervectors
 #define dimension 10000
@@ -27,7 +27,7 @@
 #define CHANNELS_VOTING channels + 1
 //Set to 1 to use the profiling's functions
 #define HWPERF 0
-//Set to 1 to use the built-ins with Wolf, 0 for the execution without built-ins. 
+//Set to 1 to use the built-ins with Wolf, 0 for the execution without built-ins.
 #define WOLF 1
 
 #define TEST 1

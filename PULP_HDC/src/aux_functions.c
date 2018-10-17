@@ -1,5 +1,5 @@
 #include "aux_functions.h"
-#include "rt/rt_alloc.h" 
+#include "rt/rt_alloc.h"
 
 #define ROUND(num) ((num - floorf(num) > 0.5f) ? ceilf(num) : floorf(num))
 
@@ -55,7 +55,7 @@ void hamming_dist(uint32_t q[bit_dim + 1], uint32_t aM[][bit_dim + 1], int sims[
 
 			tmp = q[j] ^ aM[i][j];
 
-#if WOLF
+#ifdef USE_INTRINSICS
 			r_tmp +=__builtin_popcount(tmp);
 #else
 			r_tmp += numberOfSetBits(tmp);
@@ -95,7 +95,6 @@ void computeNgram(float buffer[channels], uint32_t iM[][bit_dim + 1], uint32_t c
 	int ix;
 	uint32_t tmp = 0;
 	int i, j;
-	uint32_t chHV[channels + 1][bit_dim + 1] = {0};
 
 	#pragma omp master
 	{
@@ -128,7 +127,7 @@ void computeNgram(float buffer[channels], uint32_t iM[][bit_dim + 1], uint32_t c
 
 		//componentwise majority: insert the value of the ith bit of each chHV row in the variable "majority"
 		//and then compute the number of 1's with the function numberOfSetBits(uint32_t).
-#if WOLF == 1
+#ifdef USE_INTRINSICS
 
 	uint32_t majority = 0;
 	uint32_t res0, res1, res2, res3, res4;
